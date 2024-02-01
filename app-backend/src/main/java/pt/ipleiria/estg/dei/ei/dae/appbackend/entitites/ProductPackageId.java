@@ -8,7 +8,6 @@ import java.util.Objects;
 
 @Embeddable
 public class ProductPackageId implements Serializable {
-
     @Column(name = "product_id")
     private Long productId;
     @Column(name = "package_id")

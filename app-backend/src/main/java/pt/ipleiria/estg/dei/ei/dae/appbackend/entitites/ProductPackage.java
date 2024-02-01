@@ -8,8 +8,12 @@ import java.io.Serializable;
 @Entity
 @Table(name = "product_package")
 public class ProductPackage {
-    @EmbeddedId
-    private ProductPackageId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Embedded
+    private ProductPackageId embeddedId;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @MapsId("productId")
@@ -30,8 +34,8 @@ public class ProductPackage {
     public ProductPackage() {
     }
 
-    public ProductPackage(ProductPackageId id, Product product, Package pack, Double price, int quantityProductsInPackage, String image) {
-        this.id = id;
+    public ProductPackage(ProductPackageId embeddedId, Product product, Package pack, Double price, int quantityProductsInPackage, String image) {
+        this.embeddedId = embeddedId;
         this.product = product;
         this.pack = pack;
         this.price = price;
@@ -39,12 +43,20 @@ public class ProductPackage {
         this.image = image;
     }
 
-    public ProductPackageId getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(ProductPackageId id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public ProductPackageId getEmbeddedId() {
+        return embeddedId;
+    }
+
+    public void setEmbeddedId(ProductPackageId embeddedId) {
+        this.embeddedId = embeddedId;
     }
 
     public Product getProduct() {
