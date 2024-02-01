@@ -25,20 +25,17 @@ public class ProductPackage {
     private Double price;
     @NotNull
     private int quantityProductsInPackage;
-    @NotNull
-    private int quantity;
     private String image;
 
     public ProductPackage() {
     }
 
-    public ProductPackage(ProductPackageId id, Product product, Package pack, Double price, int quantityProductsInPackage, int quantity, String image) {
+    public ProductPackage(ProductPackageId id, Product product, Package pack, Double price, int quantityProductsInPackage, String image) {
         this.id = id;
         this.product = product;
         this.pack = pack;
         this.price = price;
         this.quantityProductsInPackage = quantityProductsInPackage;
-        this.quantity = quantity;
         this.image = image;
     }
 
@@ -80,14 +77,6 @@ public class ProductPackage {
 
     public void setQuantityProductsInPackage(int quantityProductsInPackage) {
         this.quantityProductsInPackage = quantityProductsInPackage;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public String getImage() {

@@ -51,9 +51,9 @@ public class ConfigBean {
         packageBean.create("Super Bock 6x33cl", 1, "Plastic");
         packageBean.create("Super Bock 12x33cl", 2, "Cartoon");
 
-        productPackageBean.create(1, 1, 3.48, 6, 3, "Not available");
-        productPackageBean.create(1, 2, 4.99, 12, 3, "Not available");
-        productPackageBean.create(2, 3, 2.99, 6, 3, "Not available");
-        productPackageBean.create(2, 4, 5.99, 12, 3, "Not available");
+        productPackageBean.create(1, 1, 3.48, 6, "Not available");
+        productPackageBean.create(1, 2, 4.99, 12, "Not available");
+        productPackageBean.create(2, 3, 2.99, 6, "Not available");
+        productPackageBean.create(2, 4, 5.99, 12, "Not available");
     }
 }

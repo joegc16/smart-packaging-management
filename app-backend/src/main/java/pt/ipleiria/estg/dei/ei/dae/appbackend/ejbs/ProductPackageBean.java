@@ -13,7 +13,7 @@ public class ProductPackageBean{
     @PersistenceContext
     private EntityManager em;
 
-    public void create(long productId, long packageId, Double price, int quantityInPackage, int quantity, String image) {
+    public void create(long productId, long packageId, Double price, int quantityInPackage, String image) {
         Product product = em.find(Product.class, productId);
         if (product == null) {
             System.err.println("Product does not exist");
@@ -25,7 +25,7 @@ public class ProductPackageBean{
             return;
         }
         ProductPackageId id = new ProductPackageId(productId, packageId);
-        ProductPackage productPackage = new ProductPackage(id, product, pack, price, quantityInPackage, quantity, image);
+        ProductPackage productPackage = new ProductPackage(id, product, pack, price, quantityInPackage, image);
         product.addProductPackage(productPackage);
         pack.addProductPackage(productPackage);
         em.persist(productPackage);
