@@ -4,11 +4,11 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Manufacturer;
+import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Customer;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.UserRole;
 
 @Stateless
-public class ManufacturerBean {
+public class CustomerBean {
     @PersistenceContext
     private EntityManager em;
 
@@ -18,10 +18,10 @@ public class ManufacturerBean {
             System.err.println("Role does not exist");
         }
         if (exists(username)) {
-            System.err.println("Manufacturer username already exists");
+            System.err.println("Customer username already exists");
         }
-        Manufacturer manufacturer = new Manufacturer(name, password, username, email, role);
-        em.persist(manufacturer);
+        Customer customer = new Customer(name, password, username, email, role);
+        em.persist(customer);
     }
 
     public boolean exists(String username) {
