@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.appbackend.entitites;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,9 @@ import java.util.List;
 public class Customer extends User{
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
-    // private Cart cart;
+
+    @OneToOne(mappedBy = "customer")
+    private Cart cart;
 
     public Customer() {
         this.orders = new ArrayList<>();
@@ -35,5 +38,13 @@ public class Customer extends User{
 
     public void removeOrder(Order order){
         orders.remove(order);
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

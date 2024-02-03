@@ -6,6 +6,7 @@ import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Cart;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.OrderItem;
 
 import java.time.LocalDate;
@@ -33,6 +34,10 @@ public class ConfigBean {
     private OrderBean orderBean;
     @EJB
     private OrderItemBean orderItemBean;
+    @EJB
+    private CartBean cartBean;
+    @EJB
+    private CartItemBean cartItemBean;
     @EJB
     private UserRoleBean userRoleBean;
     @EJB
@@ -71,19 +76,19 @@ public class ConfigBean {
         productPackageBean.create(2, 3, 2.99, 6, "Not available");
         productPackageBean.create(2, 4, 5.99, 12, "Not available");
 
+        cartBean.create(2, 0.0);
+        cartItemBean.create(1,1,2,6.96);
+        cartItemBean.create(1,1,1,4.99);
+        cartItemBean.create(1,1,1,2.99);
+        Cart cart = cartBean.find(1);
+        cart.setCount(14.94);
+
         orderBean.create(2,currentDate, null,"Leiria","2410-000","Portugal","Rua 1","Credit Card","Pending",0.0);
         List<OrderItem> orderItemList = new ArrayList<>();
 
-        OrderItem item1 = orderItemBean.create(1,1,2,6.96);
-        OrderItem item2 = orderItemBean.create(2,1,1,4.99);
-        OrderItem item3 = orderItemBean.create(3,1,1,2.99);
-        OrderItem item4 = orderItemBean.create(4,1,1,5.99);
-        //orderItemList.add(item1);
-        //orderItemList.add(item2);
-        //orderItemList.add(item3);
-        //orderItemList.add(item4);
-
-        //orderBean.updateOrderItems(1, orderItemList);
-
+        orderItemBean.create(1,1,2,6.96);
+        orderItemBean.create(2,1,1,4.99);
+        orderItemBean.create(3,1,1,2.99);
+        orderItemBean.create(4,1,1,5.99);
     }
 }
