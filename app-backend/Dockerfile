@@ -1,4 +1,5 @@
 FROM quay.io/wildfly/wildfly:27.0.0.Final-jdk17
+EXPOSE 8787
 
 ARG WILDFLY_ADMIN_PASSWORD=wildsecret
 ARG POSTGRES_DRIVER_VERSION=42.5.4
