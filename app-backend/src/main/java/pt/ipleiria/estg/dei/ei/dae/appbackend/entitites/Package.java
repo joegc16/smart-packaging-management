@@ -19,13 +19,19 @@ public class Package {
     private PackageType packageType;
     @NotNull
     private String material;
-    @ManyToOne
-    private Product product;
     @OneToMany(mappedBy = "pack")
     private List<ProductPackage> productPackages;
+    @ManyToMany
+    @JoinTable(
+            name = "packages_sensor_types",
+            joinColumns = @JoinColumn(name = "package_code"),
+            inverseJoinColumns = @JoinColumn(name = "sensor_id")
+    )
+    private List<SensorType> sensorsTypes;
 
     public Package() {
         this.productPackages = new ArrayList<>();
+        this.sensorsTypes = new ArrayList<>();
     }
 
     public Package(String name, PackageType packageType, String material) {
@@ -33,6 +39,15 @@ public class Package {
         this.packageType = packageType;
         this.material = material;
         this.productPackages = new ArrayList<>();
+        this.sensorsTypes = new ArrayList<>();
+    }
+
+    public Package(String name, PackageType packageType, String material, List<SensorType> sensorsTypes) {
+        this.name = name;
+        this.packageType = packageType;
+        this.material = material;
+        this.productPackages = new ArrayList<>();
+        this.sensorsTypes = sensorsTypes;
     }
 
     public long getCode() {
@@ -76,16 +91,26 @@ public class Package {
     }
 
     public void addProductPackage(ProductPackage productPackage){
-        if (this.productPackages.contains(productPackage)) {
-            return;
-        }
-        if (productPackage == null) {
-            return;
-        }
         this.productPackages.add(productPackage);
     }
 
     public void removeProductPackage(ProductPackage productPackage){
         this.productPackages.remove(productPackage);
+    }
+
+    public List<SensorType> getSensorsTypes() {
+        return sensorsTypes;
+    }
+
+    public void setSensorsTypes(List<SensorType> sensors) {
+        this.sensorsTypes = sensors;
+    }
+
+    public void addSensorType(SensorType sensorType) {
+        sensorsTypes.add(sensorType);
+    }
+
+    public void removeSensorType(SensorType sensorType) {
+        sensorsTypes.remove(sensorType);
     }
 }

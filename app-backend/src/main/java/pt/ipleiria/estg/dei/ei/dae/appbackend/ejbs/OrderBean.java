@@ -38,4 +38,8 @@ public class OrderBean {
         em.merge(order);
     }
 
+    public Order findOrder(long id) {
+        return em.find(Order.class, id);
+    }
+
 }

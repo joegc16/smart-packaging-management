@@ -36,8 +36,12 @@ public class Order {
     @NotNull
     private Double count;
 
+    @OneToMany(mappedBy = "order")
+    private List<Sensor> sensors;
+
     public Order() {
         this.orderItems = new ArrayList<>();
+        this.sensors = new ArrayList<>();
     }
 
     public Order(Customer customer, Date orderDate, Date deliveryDate,
@@ -53,6 +57,7 @@ public class Order {
         this.paymentMethod = paymentMethod;
         this.status = status;
         this.orderItems = new ArrayList<>();
+        this.sensors = new ArrayList<>();
         this.count = count;
     }
 
@@ -156,7 +161,23 @@ public class Order {
         return count;
     }
 
-    public void setCount(double count) {
+    public void setCount(Double count) {
         this.count = count;
+    }
+
+    public List<Sensor> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(List<Sensor> sensors) {
+        this.sensors = sensors;
+    }
+
+    public void addSensor(Sensor sensor) {
+        sensors.add(sensor);
+    }
+
+    public void removeSensor(Sensor sensor) {
+        sensors.remove(sensor);
     }
 }
