@@ -24,6 +24,8 @@ public class ConfigBean {
     @EJB
     private CustomerBean customerBean;
     @EJB
+    private LogisticOperatorBean logisticOperatorBean;
+    @EJB
     private ProductBean productBean;
     @EJB
     private PackageBean packageBean;
@@ -83,9 +85,10 @@ public class ConfigBean {
         alertTypeBean.create("Package Shock"); //4
         alertTypeBean.create("Package Open"); //5
 
-        manufacturerBean.create("Joao", "password123", "joao", "joao@gmail.com", 1); //1
-        customerBean.create("Sam", "password123", "sam", "sam@gmail.com", 2); //2
-        customerBean.create("John", "password123", "john", "jhon@gmail.com", 2); //3
+        manufacturerBean.create("Joao", "123", "joao", "joao@gmail.com", 1); //1
+        customerBean.create("Sam", "123", "sam", "sam@gmail.com", 2); //2
+        customerBean.create("John", "123", "john", "jhon@gmail.com", 2); //3
+        logisticOperatorBean.create("Carlos", "123", "logisticUser", "logisticUser@gmail.com", 3); //4
         cartBean.create(2, 0.0);//1
         cartBean.create(3, 0.0);//2
 
@@ -124,9 +127,9 @@ public class ConfigBean {
         cart2.setCount(7.98);
 
 
-        orderBean.create(2,currentDate, null,"Leiria","2410-000",
+        orderBean.create(2,1,4,currentDate, null,"Leiria","2410-000",
                 "Portugal","Rua 1","Credit Card","Pending",0.0);//1
-        orderBean.create(3,currentDate, null,"Lisboa","2410-150",
+        orderBean.create(3,1,4,currentDate, null,"Lisboa","2410-150",
                 "Portugal","Rua 2","Credit Card","Pending",0.0);//2
 
         orderItemBean.create(1,1,2,6.96);//1
