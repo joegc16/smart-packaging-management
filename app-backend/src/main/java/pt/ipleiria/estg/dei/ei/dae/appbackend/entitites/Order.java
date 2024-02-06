@@ -15,6 +15,10 @@ public class Order {
     private long id;
     @ManyToOne
     private Customer customer;
+    @ManyToOne
+    private Manufacturer manufacturer;
+    @ManyToOne
+    private LogisticOperator logisticOperator;
     @NotNull
     private Date orderDate;
     private Date deliveryDate;
@@ -44,10 +48,12 @@ public class Order {
         this.sensors = new ArrayList<>();
     }
 
-    public Order(Customer customer, Date orderDate, Date deliveryDate,
+    public Order(Customer customer, Manufacturer manufacturer, LogisticOperator logisticOperator, Date orderDate, Date deliveryDate,
                  String city, String postalCode, String country, String address,
                  String paymentMethod, String status, Double count) {
         this.customer = customer;
+        this.manufacturer = manufacturer;
+        this.logisticOperator = logisticOperator;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.city = city;
@@ -75,6 +81,22 @@ public class Order {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public LogisticOperator getLogisticOperator() {
+        return logisticOperator;
+    }
+
+    public void setLogisticOperator(LogisticOperator logisticOperator) {
+        this.logisticOperator = logisticOperator;
     }
 
     public Date getOrderDate() {
