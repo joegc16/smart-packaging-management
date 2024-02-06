@@ -20,7 +20,7 @@ public class Sensor {
     private double value;
     @NotNull
     @ManyToOne
-    private UnidadeType unidadeType;
+    private UnitType unitType;
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
@@ -32,11 +32,11 @@ public class Sensor {
     }
 
     public Sensor(SensorType sensorType, Date timestamp, double value,
-                  UnidadeType unidadeType, Order order, Package pack) {
+                  UnitType unitType, Order order, Package pack) {
         this.sensorType = sensorType;
         this.timestamp = timestamp;
         this.value = value;
-        this.unidadeType = unidadeType;
+        this.unitType = unitType;
         this.order = order;
         this.pack = pack;
     }
@@ -73,12 +73,12 @@ public class Sensor {
         this.value = value;
     }
 
-    public UnidadeType getUnidadeType() {
-        return unidadeType;
+    public UnitType getUnitType() {
+        return unitType;
     }
 
-    public void setUnidadeType(UnidadeType unidadeType) {
-        this.unidadeType = unidadeType;
+    public void setUnitType(UnitType unitType) {
+        this.unitType = unitType;
     }
 
     public Order getOrder() {

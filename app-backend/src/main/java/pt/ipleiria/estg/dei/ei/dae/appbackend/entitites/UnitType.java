@@ -1,22 +1,21 @@
 package pt.ipleiria.estg.dei.ei.dae.appbackend.entitites;
 
-import jakarta.ejb.EJB;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "unidade_types")
-public class UnidadeType {
+@Table(name = "unit_types")
+public class UnitType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
     private String name;
 
-    public UnidadeType() {
+    public UnitType() {
     }
 
-    public UnidadeType(String name) {
+    public UnitType(String name) {
         this.name = name;
     }
 

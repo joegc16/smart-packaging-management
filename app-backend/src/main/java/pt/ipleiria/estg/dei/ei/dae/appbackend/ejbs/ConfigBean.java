@@ -48,7 +48,7 @@ public class ConfigBean {
     @EJB
     private PackageTypeBean packageTypeBean;
     @EJB
-    private UnidadeTypeBean unidadeTypeBean;
+    private UnitTypeBean unitTypeBean;
     @EJB
     private SensorTypeBean sensorTypeBean;
     @EJB
@@ -75,10 +75,10 @@ public class ConfigBean {
         sensorTypeBean.create("Light"); //3
         sensorTypeBean.create("Shock"); //4
         sensorTypeBean.create("Open"); //5
-        unidadeTypeBean.create("Celsius"); //1
-        unidadeTypeBean.create("Percentage"); //2
-        unidadeTypeBean.create("Lux"); //3
-        unidadeTypeBean.create("G"); //4
+        unitTypeBean.create("Celsius"); //1
+        unitTypeBean.create("Percentage"); //2
+        unitTypeBean.create("Lux"); //3
+        unitTypeBean.create("G"); //4
         alertTypeBean.create("Dangerous Temperature"); //1
         alertTypeBean.create("Dangerous Humidity"); //2
         alertTypeBean.create("Dangerous Light"); //3

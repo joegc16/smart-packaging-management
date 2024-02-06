@@ -20,8 +20,8 @@ public class SensorBean {
         if (sensorType == null) {
             throw new IllegalArgumentException("Sensor type with id " + sensorTypeId + " not found.");
         }
-        UnidadeType unidadeType = em.find(UnidadeType.class, unidadeTypeId);
-        if (unidadeType == null) {
+        UnitType unitType = em.find(UnitType.class, unidadeTypeId);
+        if (unitType == null) {
             throw new IllegalArgumentException("Unidade type with id " + unidadeTypeId + " not found.");
         }
         Order order = em.find(Order.class, orderId);
@@ -32,7 +32,7 @@ public class SensorBean {
         if (pack == null) {
             throw new IllegalArgumentException("Package with id " + packageId + " not found.");
         }
-        Sensor sensor = new Sensor(sensorType, timestamp, value, unidadeType, order, pack);
+        Sensor sensor = new Sensor(sensorType, timestamp, value, unitType, order, pack);
         order.addSensor(sensor);
         em.persist(sensor);
     }
