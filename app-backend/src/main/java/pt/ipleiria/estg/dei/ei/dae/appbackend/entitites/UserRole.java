@@ -10,13 +10,13 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
-    private String role;
+    private String name;
 
     public UserRole() {
     }
 
-    public UserRole(String role) {
-        this.role = role;
+    public UserRole(String name) {
+        this.name = name;
     }
 
     public long getId() {
@@ -27,11 +27,11 @@ public class UserRole {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(String role) {
+        this.name = role;
     }
 }
