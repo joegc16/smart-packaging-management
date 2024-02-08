@@ -1,0 +1,24 @@
+### return All users
+GET http://localhost:8080/academics/api/users
+Accept: application/json
+
+### return Sensor Id
+GET http://localhost:8080/academics/api/sensors/1
+Accept: application/json
+
+### return All Orders
+GET http://localhost:8080/academics/api/orders
+Accept: application/json
+
+
+### return Order Details
+GET http://localhost:8080/academics/api/orders/1
+Accept: application/json
+
+### return OrderItems by Order Id
+GET http://localhost:8080/academics/api/orders/1/items
+Accept: application/json
+
+### return Sensors by Order Id
+GET http://localhost:8080/academics/api/orders/1/sensors
+Accept: application/json

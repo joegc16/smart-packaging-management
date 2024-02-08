@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.appbackend.ejbs;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.*;
 
 import java.util.Date;
@@ -38,6 +39,34 @@ public class OrderBean {
         em.persist(order);
     }
 
+    public Order findOrder(long id) {
+        return em.find(Order.class, id);
+    }
+
+    public List<Order> getAll() {
+        return em.createNamedQuery("getAllOrders", Order.class).getResultList();
+    }
+
+    public Order getOrderItems(long id) {
+        Order order = this.findOrder(id);
+        // Check if it exists, etc...
+        if (order == null) {
+            return null;
+        }
+        Hibernate.initialize(order.getOrderItems());
+        return order;
+    }
+
+    public Order getOrderSensors(long id) {
+        Order order = this.findOrder(id);
+        // Check if it exists, etc...
+        if (order == null) {
+            return null;
+        }
+        Hibernate.initialize(order.getSensors());
+        return order;
+    }
+
     public void updateOrderItems(long id, List<OrderItem> orderItems) {
         Order order = em.find(Order.class, id);
         if (order == null) {
@@ -47,9 +76,4 @@ public class OrderBean {
         order.setOrderItems(orderItems);
         em.merge(order);
     }
-
-    public Order findOrder(long id) {
-        return em.find(Order.class, id);
-    }
-
 }
