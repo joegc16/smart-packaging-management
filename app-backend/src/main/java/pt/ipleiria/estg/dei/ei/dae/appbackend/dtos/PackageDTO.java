@@ -14,7 +14,8 @@ public class PackageDTO implements Serializable {
     public PackageDTO() {
     }
 
-    public PackageDTO(String name, String packageType, String material, int totalQuantity, List<SensorTypeDTO> sensorsTypes) {
+    public PackageDTO(long code,String name, String packageType, String material, int totalQuantity, List<SensorTypeDTO> sensorsTypes) {
+        this.code = code;
         this.name = name;
         this.packageType = packageType;
         this.material = material;

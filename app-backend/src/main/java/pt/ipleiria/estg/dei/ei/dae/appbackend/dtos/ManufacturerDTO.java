@@ -13,8 +13,8 @@ public class ManufacturerDTO extends UserDTO implements Serializable {
         this.orders = new ArrayList<>();
     }
 
-    public ManufacturerDTO(String name, String username, String email, String role) {
-        super(name, username, email, role);
+    public ManufacturerDTO(long id, String name, String username, String email, String role) {
+        super(id, name, username, email, role);
         this.products = new ArrayList<>();
         this.orders = new ArrayList<>();
     }

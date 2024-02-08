@@ -6,7 +6,7 @@ public class SensorDTO implements Serializable {
     private long id;
     private String sensorType;
     private String timestamp;
-    private String value;
+    private double value;
     private String unitType;
     private long orderId;
     private long packageId;
@@ -14,7 +14,8 @@ public class SensorDTO implements Serializable {
     public SensorDTO() {
     }
 
-    public SensorDTO(String sensorType, String timestamp, String value, String unitType, long orderId, long packageId) {
+    public SensorDTO(long id, String sensorType, String timestamp, double value, String unitType, long orderId, long packageId) {
+        this.id = id;
         this.sensorType = sensorType;
         this.timestamp = timestamp;
         this.value = value;
@@ -47,11 +48,11 @@ public class SensorDTO implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public String getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

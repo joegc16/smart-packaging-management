@@ -26,10 +26,11 @@ public class OrderDTO implements Serializable {
         sensors = new ArrayList<>();
     }
 
-    public OrderDTO(long customerId, long manufacturerId, long logisticOperatorId,
+    public OrderDTO(long id,long customerId, long manufacturerId, long logisticOperatorId,
                     String orderDate, String deliveryDate, String city,
                     String postalCode, String country, String address,
                     String paymentMethod, String status, Double count) {
+        this.id = id;
         this.customerId = customerId;
         this.manufacturerId = manufacturerId;
         this.logisticOperatorId = logisticOperatorId;

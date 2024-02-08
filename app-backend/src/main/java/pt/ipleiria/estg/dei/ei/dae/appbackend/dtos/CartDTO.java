@@ -12,7 +12,8 @@ public class CartDTO implements Serializable {
     public CartDTO() {
     }
 
-    public CartDTO(long customerId, double count) {
+    public CartDTO(long id, long customerId, double count) {
+        this.id = id;
         this.customerId = customerId;
         this.count = count;
     }

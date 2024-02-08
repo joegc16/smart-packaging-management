@@ -12,8 +12,8 @@ public class CustomerDTO extends UserDTO implements Serializable {
         this.orders = new ArrayList<>();
     }
 
-    public CustomerDTO(String username, String email, String name, String role) {
-        super(name, username, name, role);
+    public CustomerDTO(long id, String name, String username, String email, String role) {
+        super(id, name, username, email, role);
         this.orders = new ArrayList<>();
     }
 

@@ -13,7 +13,8 @@ public class ProductPackageDTO implements Serializable{
     public ProductPackageDTO() {
     }
 
-    public ProductPackageDTO(long productId, long packageId, Double price, int quantityProductsInPackage, String image) {
+    public ProductPackageDTO(long id, long productId, long packageId, Double price, int quantityProductsInPackage, String image) {
+        this.id = id;
         this.productId = productId;
         this.packageId = packageId;
         this.price = price;

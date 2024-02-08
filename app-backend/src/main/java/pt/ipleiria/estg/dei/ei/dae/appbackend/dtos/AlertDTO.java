@@ -16,7 +16,8 @@ public class AlertDTO implements Serializable{
     public AlertDTO() {
     }
 
-    public AlertDTO(String alertType, long orderId, String timestamp, String message) {
+    public AlertDTO(long id,String alertType, long orderId, String timestamp, String message) {
+        this.id = id;
         this.alertType = alertType;
         this.orderId = orderId;
         this.timestamp = timestamp;

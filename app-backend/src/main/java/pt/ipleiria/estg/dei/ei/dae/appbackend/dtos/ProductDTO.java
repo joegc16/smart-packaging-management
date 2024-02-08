@@ -13,7 +13,8 @@ public class ProductDTO implements Serializable {
     public ProductDTO() {
     }
 
-    public ProductDTO(String name, String description, String brand, int totalQuantity, String manufacturerUsername) {
+    public ProductDTO(long code, String name, String description, String brand, int totalQuantity, String manufacturerUsername) {
+        this.code = code;
         this.name = name;
         this.description = description;
         this.brand = brand;
