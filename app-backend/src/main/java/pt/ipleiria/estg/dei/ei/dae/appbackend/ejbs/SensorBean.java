@@ -40,4 +40,5 @@ public class SensorBean {
     public Sensor findSensor(long id) {
         return em.find(Sensor.class, id);
     }
+
 }
