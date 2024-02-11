@@ -22,6 +22,17 @@ Accept: application/json
 GET http://localhost:8080/academics/api/orders/1/sensors
 Accept: application/json
 
+### Order Update by Id
+PUT http://localhost:8080/academics/api/orders/1
+Content-Type: application/json
+
+{
+  "deliveryDate": "2024-02-11",
+  "estimatedDeliveryTime": "2024-02-15",
+  "packageLocation": "Coimbra",
+  "status": "Sending"
+}
+
 ### Products All
 GET http://localhost:8080/academics/api/products/
 Accept: application/json

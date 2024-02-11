@@ -14,8 +14,8 @@ public class OrderBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void create(long customerId, long manufacturerId, long logisticOperatorId, Date orderDate, Date deliveryDate, String city,
-                       String postalCode, String country, String address, String paymentMethod,
+    public void create(long customerId, long manufacturerId, long logisticOperatorId, Date orderDate, Date deliveryDate,
+                       String estimatedDeliveryTime, String packageLocation, String city, String postalCode, String country, String address, String paymentMethod,
                        String status, Double count) {
         Customer customer = em.find(Customer.class, customerId);
         if (customer == null) {
@@ -32,7 +32,8 @@ public class OrderBean {
             System.err.println("Logistic Operator does not exist");
             return;
         }
-        Order order = new Order(customer, manufacturer, logisticOperator, orderDate, deliveryDate, city, postalCode, country, address, paymentMethod, status, count);
+        Order order = new Order(customer, manufacturer, logisticOperator, orderDate, deliveryDate,
+                estimatedDeliveryTime, packageLocation, city, postalCode, country, address, paymentMethod, status, count);
         customer.addOrder(order);
         manufacturer.addOrder(order);
         logisticOperator.addOrder(order);
@@ -75,5 +76,20 @@ public class OrderBean {
         }
         order.setOrderItems(orderItems);
         em.merge(order);
+    }
+
+    public boolean update(long id, Date parse, String estimatedDeliveryTime, String packageLocation, String status) {
+        Order order = em.find(Order.class, id);
+        if (order == null) {
+            System.err.println("Order does not exist");
+            return false;
+        }
+
+        order.setDeliveryDate(parse);
+        order.setEstimatedDeliveryTime(estimatedDeliveryTime);
+        order.setPackageLocation(packageLocation);
+        order.setStatus(status);
+        em.merge(order);
+        return true;
     }
 }

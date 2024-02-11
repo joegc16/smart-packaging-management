@@ -95,6 +95,12 @@ public class ProductPackageBean{
             System.err.println("Product Package does not exist");
             return;
         }
+        Product product = productPackage.getProduct();
+        product.removeProductPackage(productPackage);
+        Package pack = productPackage.getPack();
+        pack.removeProductPackage(productPackage);
+        em.merge(product);
+        em.merge(pack);
         em.remove(productPackage);
     }
 }

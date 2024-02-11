@@ -14,6 +14,8 @@ import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Order;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.OrderItem;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Sensor;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
 public class OrderService {
     @EJB
     private OrderBean orderBean;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is "/api/users"
@@ -69,6 +73,55 @@ public class OrderService {
                 .build();
     }
 
+    @POST
+    @Path("/")
+    public Response createOrder(OrderDTO orderDTO) throws ParseException {
+        orderBean.create(
+                orderDTO.getCustomerId(),
+                orderDTO.getManufacturerId(),
+                orderDTO.getLogisticOperatorId(),
+                dateFormat.parse(orderDTO.getOrderDate()),
+                new Date(),
+                orderDTO.getEstimatedDeliveryTime(),
+                orderDTO.getPackageLocation(),
+                orderDTO.getCity(),
+                orderDTO.getPostalCode(),
+                orderDTO.getCountry(),
+                orderDTO.getAddress(),
+                orderDTO.getPaymentMethod(),
+                orderDTO.getStatus(),
+                orderDTO.getCount()
+        );
+        Order newOrder = orderBean.findOrder(orderDTO.getId());
+        if (newOrder == null)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR_CREATING_ORDER").build();
+        return
+                Response.status(Response.Status.CREATED).entity(orderToDTO(newOrder)).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    public Response updateOrder(@PathParam("id") long id, OrderDTO orderDTO)
+            throws ParseException {
+        Order existingOrder = orderBean.findOrder(id);
+        if (existingOrder == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("ORDER NOT FOUND").build();
+
+        boolean success = orderBean.update(
+                id,
+                dateFormat.parse(orderDTO.getDeliveryDate()),
+                orderDTO.getEstimatedDeliveryTime(),
+                orderDTO.getPackageLocation(),
+                orderDTO.getStatus()
+        );
+
+        Order updatedOrder = orderBean.findOrder(id);
+        if (!success || updatedOrder == null)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR_UPDATING_ORDER").build();
+        return Response.ok(orderToDTO(updatedOrder)).build();
+    }
+
+
     private List<OrderDTO> ordersToDTOs(List<Order> orders) {
         return orders.stream().map(this::orderToDTO).collect(Collectors.toList());
     }
@@ -84,6 +137,8 @@ public class OrderService {
                 order.getLogisticOperator().getId(),
                 order.getOrderDate().toString(),
                 deliveryDate.toString(),
+                order.getEstimatedDeliveryTime(),
+                order.getPackageLocation(),
                 order.getCity(),
                 order.getPostalCode(),
                 order.getCountry(),

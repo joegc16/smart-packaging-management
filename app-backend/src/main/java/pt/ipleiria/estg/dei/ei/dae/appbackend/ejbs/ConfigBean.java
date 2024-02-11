@@ -128,9 +128,11 @@ public class ConfigBean {
         cart2.setCount(7.98);
 
 
-        orderBean.create(2,1,4,currentDate, null,"Leiria","2410-000",
-                "Portugal","Rua 1","Credit Card","Pending",0.0);//1
-        orderBean.create(3,1,4,currentDate, null,"Lisboa","2410-150",
+        orderBean.create(2,1,4,currentDate, null,
+                "1 semana","Lisbon", "Leiria","2410-000", "Portugal",
+                "Rua 1","Credit Card","Pending",0.0);//1
+        orderBean.create(3,1,4,currentDate, null,
+                "1 semana","Lisbon","Lisboa","2410-150",
                 "Portugal","Rua 2","Credit Card","Pending",0.0);//2
 
         orderItemBean.create(1,1,2,6.96);//1

@@ -28,6 +28,8 @@ public class Order {
     @NotNull
     private Date orderDate;
     private Date deliveryDate;
+    private String estimatedDeliveryTime;
+    private String packageLocation;
     @NotNull
     private String city;
     @NotNull
@@ -49,19 +51,24 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<Sensor> sensors;
 
+    //@OneToMany(mappedBy = "order")
+    //private List<OrderUpdates> updates;
+
     public Order() {
         this.orderItems = new ArrayList<>();
         this.sensors = new ArrayList<>();
     }
 
-    public Order(Customer customer, Manufacturer manufacturer, LogisticOperator logisticOperator, Date orderDate, Date deliveryDate,
-                 String city, String postalCode, String country, String address,
-                 String paymentMethod, String status, Double count) {
+    public Order(Customer customer, Manufacturer manufacturer, LogisticOperator logisticOperator, Date orderDate,
+                 Date deliveryDate, String estimatedDeliveryTime, String packageLocation, String city, String postalCode, String country,
+                 String address, String paymentMethod, String status, Double count) {
         this.customer = customer;
         this.manufacturer = manufacturer;
         this.logisticOperator = logisticOperator;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
+        this.estimatedDeliveryTime = estimatedDeliveryTime;
+        this.packageLocation = packageLocation;
         this.city = city;
         this.postalCode = postalCode;
         this.country = country;
@@ -119,6 +126,22 @@ public class Order {
 
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public String getEstimatedDeliveryTime() {
+        return estimatedDeliveryTime;
+    }
+
+    public void setEstimatedDeliveryTime(String estimatedDeliveryTime) {
+        this.estimatedDeliveryTime = estimatedDeliveryTime;
+    }
+
+    public String getPackageLocation() {
+        return packageLocation;
+    }
+
+    public void setPackageLocation(String packageLocation) {
+        this.packageLocation = packageLocation;
     }
 
     public String getCity() {

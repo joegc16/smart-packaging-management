@@ -11,6 +11,8 @@ public class OrderDTO implements Serializable {
     private long logisticOperatorId;
     private String orderDate;
     private String deliveryDate;
+    private String estimatedDeliveryTime;
+    private String packageLocation;
     private String city;
     private String postalCode;
     private String country;
@@ -27,8 +29,8 @@ public class OrderDTO implements Serializable {
     }
 
     public OrderDTO(long id,long customerId, long manufacturerId, long logisticOperatorId,
-                    String orderDate, String deliveryDate, String city,
-                    String postalCode, String country, String address,
+                    String orderDate, String deliveryDate, String estimatedDeliveryTime,
+                    String packageLocation, String city,  String postalCode, String country, String address,
                     String paymentMethod, String status, Double count) {
         this.id = id;
         this.customerId = customerId;
@@ -36,6 +38,8 @@ public class OrderDTO implements Serializable {
         this.logisticOperatorId = logisticOperatorId;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
+        this.estimatedDeliveryTime = estimatedDeliveryTime;
+        this.packageLocation = packageLocation;
         this.city = city;
         this.postalCode = postalCode;
         this.country = country;
@@ -93,6 +97,22 @@ public class OrderDTO implements Serializable {
 
     public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public String getEstimatedDeliveryTime() {
+        return estimatedDeliveryTime;
+    }
+
+    public void setEstimatedDeliveryTime(String estimatedDeliveryTime) {
+        this.estimatedDeliveryTime = estimatedDeliveryTime;
+    }
+
+    public String getPackageLocation() {
+        return packageLocation;
+    }
+
+    public void setPackageLocation(String packageLocation) {
+        this.packageLocation = packageLocation;
     }
 
     public String getCity() {

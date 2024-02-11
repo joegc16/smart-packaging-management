@@ -79,6 +79,8 @@ public class ProductBean {
             System.err.println("Product does not exist");
             return;
         }
+        Manufacturer manufacturer = product.getManufacturer();
+        manufacturer.removeProduct(product);
         em.remove(product);
     }
 }
