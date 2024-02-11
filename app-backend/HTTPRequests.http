@@ -32,7 +32,7 @@ POST http://localhost:8080/academics/api/products/
 Content-Type: application/json
 
 {
-  "name": "Product 1",
+  "name": "Product 2",
   "brand": "Some other Brand",
   "description": "another best product ever",
   "totalQuantity": 180,
@@ -52,7 +52,7 @@ Content-Type: application/json
 
 {
   "name": "Product updated",
-  "brand": "Some other Brand",
+  "brand": "Some Updated Brand",
   "description": "another best product ever",
   "totalQuantity": 180,
   "manufacturerUsername": "joao"
@@ -97,6 +97,40 @@ Content-Type: application/json
     {
       "id": 1
     }
-
   ]
 }
+
+### Package Delete by Id
+DELETE http://localhost:8080/academics/api/packages/6
+
+### ProductPackage All
+GET http://localhost:8080/academics/api/productPackages/
+
+### ProductPackage by Id
+GET http://localhost:8080/academics/api/productPackages/5
+Accept: application/json
+
+### ProductPackage create
+POST http://localhost:8080/academics/api/productPackages/
+Content-Type: application/json
+
+{
+  "productCode": 1,
+  "packageCode": 3,
+  "price": 12.99,
+  "quantityProductsInPackage": 10,
+  "image": "Not Available"
+}
+
+### ProductPackage Update by Id
+PUT http://localhost:8080/academics/api/productPackages/5
+Content-Type: application/json
+
+{
+  "price": 15.99,
+  "quantityProductsInPackage": 24,
+  "image": "Not Available"
+}
+
+### ProductPackage Delete by Id
+DELETE http://localhost:8080/academics/api/productPackages/5

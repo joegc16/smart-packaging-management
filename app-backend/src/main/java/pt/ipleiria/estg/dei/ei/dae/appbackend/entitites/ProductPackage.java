@@ -7,6 +7,12 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "product_packages")
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllProductPackages",
+                query = "SELECT pp FROM ProductPackage pp JOIN pp.product p ORDER BY p.name"
+        )
+})
 public class ProductPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +22,13 @@ public class ProductPackage {
     private ProductPackageId embeddedId;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @MapsId("productId")
-    @JoinColumn(name = "product_id")
+    @MapsId("productCode")
+    @JoinColumn(name = "product_code")
     private Product product;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @MapsId("packageId")
-    @JoinColumn(name = "package_id")
+    @MapsId("packageCode")
+    @JoinColumn(name = "package_code")
     private Package pack;
 
     @NotNull

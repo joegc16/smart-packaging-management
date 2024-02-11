@@ -73,11 +73,12 @@ public class ProductBean {
         return true;
     }
 
-    public boolean delete(long code) {
+    public void delete(long code) {
         Product product = em.find(Product.class, code);
-        if (product == null)
-            return false;
+        if (product == null){
+            System.err.println("Product does not exist");
+            return;
+        }
         em.remove(product);
-        return true;
     }
 }

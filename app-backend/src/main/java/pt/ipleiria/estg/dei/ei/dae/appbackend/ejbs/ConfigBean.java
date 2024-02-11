@@ -109,13 +109,14 @@ public class ConfigBean {
 
         packageBean.create("Cergal 6x33cl", 1, "Plastic", sensorTypes);//1
         packageBean.create("Cergal 12x33cl", 2, "Cartoon", sensorTypes);//2
+        packageBean.create("Cergal 24x33cl", 3, "Cartoon", sensorTypes);//3
         packageBean.create("Super Bock 6x33cl", 1, "Plastic", sensorTypes);//3
         packageBean.create("Super Bock 12x33cl", 2, "Cartoon", sensorTypes);//4
 
         productPackageBean.create(1, 1, 3.48, 6, "Not available");//1
         productPackageBean.create(1, 2, 4.99, 12, "Not available");//2
-        productPackageBean.create(2, 3, 2.99, 6, "Not available");//3
-        productPackageBean.create(2, 4, 5.99, 12, "Not available");//4
+        productPackageBean.create(2, 4, 2.99, 6, "Not available");//3
+        productPackageBean.create(2, 5, 5.99, 12, "Not available");//4
 
         cartItemBean.create(1,1,2,6.96);//1
         Cart cart = cartBean.find(1);

@@ -8,33 +8,33 @@ import java.util.Objects;
 
 @Embeddable
 public class ProductPackageId implements Serializable {
-    @Column(name = "product_id")
-    private Long productId;
-    @Column(name = "package_id")
-    private Long packageId;
+    @Column(name = "product_code")
+    private Long productCode;
+    @Column(name = "package_code")
+    private Long packageCode;
 
     public ProductPackageId() {
     }
 
-    public ProductPackageId(long productId, long packageId) {
-        this.productId = productId;
-        this.packageId = packageId;
+    public ProductPackageId(long productCode, long packageCode) {
+        this.productCode = productCode;
+        this.packageCode = packageCode;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getProductCode() {
+        return productCode;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProductCode(Long productId) {
+        this.productCode = productId;
     }
 
-    public Long getPackageId() {
-        return packageId;
+    public Long getPackageCode() {
+        return packageCode;
     }
 
-    public void setPackageId(Long packageId) {
-        this.packageId = packageId;
+    public void setPackageCode(Long packageId) {
+        this.packageCode = packageId;
     }
 
     @Override
@@ -42,11 +42,11 @@ public class ProductPackageId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductPackageId that = (ProductPackageId) o;
-        return productId.equals(that.productId) && packageId.equals(that.packageId);
+        return productCode.equals(that.productCode) && packageCode.equals(that.packageCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, packageId);
+        return Objects.hash(productCode, packageCode);
     }
 }

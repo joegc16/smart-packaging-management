@@ -92,15 +92,4 @@ public class PackageBean {
         return em.find(SensorType.class, id);
     }
 
-    public void addSensorType(long codePackage, SensorType sensorType){
-        Package pack = em.find(Package.class, codePackage);
-        if (pack == null) {
-            System.err.println("Package does not exist");
-            return;
-        }
-        pack.addSensorType(sensorType);
-        em.merge(pack);
-    }
-
-
 }

@@ -57,7 +57,7 @@ public class ProductService {
         if (newProduct == null)
             return Response.status(Response.Status.BAD_REQUEST).build();
         return
-                Response.status(Response.Status.CREATED).entity("PRODUCT CREATED SUCCESSFULLY:\n" + productToDTO(newProduct)).build();
+                Response.status(Response.Status.CREATED).entity(productToDTO(newProduct)).build();
     }
 
     @PUT
@@ -81,7 +81,7 @@ public class ProductService {
                 productDTO.getManufacturerUsername()
         );
 
-        Product updatedProduct = productBean.findProduct(productDTO.getCode());
+        Product updatedProduct = productBean.findProduct(code);
         if (!success || updatedProduct == null)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 

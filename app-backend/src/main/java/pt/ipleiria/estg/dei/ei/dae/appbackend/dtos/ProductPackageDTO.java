@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class ProductPackageDTO implements Serializable{
     private long id;
-    private long productId;
-    private long packageId;
+    private long productCode;
+    private long packageCode;
     private Double price;
     private int quantityProductsInPackage;
     private String image;
@@ -13,10 +13,10 @@ public class ProductPackageDTO implements Serializable{
     public ProductPackageDTO() {
     }
 
-    public ProductPackageDTO(long id, long productId, long packageId, Double price, int quantityProductsInPackage, String image) {
+    public ProductPackageDTO(long id, long productCode, long packageCode, Double price, int quantityProductsInPackage, String image) {
         this.id = id;
-        this.productId = productId;
-        this.packageId = packageId;
+        this.productCode = productCode;
+        this.packageCode = packageCode;
         this.price = price;
         this.quantityProductsInPackage = quantityProductsInPackage;
         this.image = image;
@@ -30,20 +30,20 @@ public class ProductPackageDTO implements Serializable{
         this.id = id;
     }
 
-    public long getProductId() {
-        return productId;
+    public long getProductCode() {
+        return productCode;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setProductCode(long productCode) {
+        this.productCode = productCode;
     }
 
-    public long getPackageId() {
-        return packageId;
+    public long getPackageCode() {
+        return packageCode;
     }
 
-    public void setPackageId(long packageId) {
-        this.packageId = packageId;
+    public void setPackageCode(long packageCode) {
+        this.packageCode = packageCode;
     }
 
     public Double getPrice() {
