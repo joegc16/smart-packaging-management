@@ -9,17 +9,19 @@ public class ProductDTO implements Serializable {
     private String description;
     private int totalQuantity;
     private String manufacturerUsername;
+    private Long manufacturerId;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(long code, String name, String description, String brand, int totalQuantity, String manufacturerUsername) {
+    public ProductDTO(long code, String name, String description, String brand, int totalQuantity, String manufacturerUsername, Long manufacturerId) {
         this.code = code;
         this.name = name;
         this.description = description;
         this.brand = brand;
         this.totalQuantity = totalQuantity;
         this.manufacturerUsername = manufacturerUsername;
+        this.manufacturerId = manufacturerId;
     }
 
     public long getCode() {
@@ -68,5 +70,14 @@ public class ProductDTO implements Serializable {
 
     public void setManufacturerUsername(String manufacturerUsername) {
         this.manufacturerUsername = manufacturerUsername;
+    }
+
+
+    public Long getManufacturerId() {
+        return manufacturerId;
+    }
+
+    public void setManufacturerId(Long manufacturerId) {
+        this.manufacturerId = manufacturerId;
     }
 }

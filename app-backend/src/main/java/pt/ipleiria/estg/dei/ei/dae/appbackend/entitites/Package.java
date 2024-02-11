@@ -8,6 +8,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "packages")
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllPackages",
+                query = "SELECT p FROM Package p ORDER BY p.code"
+        )
+})
 public class Package {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,6 +116,11 @@ public class Package {
         sensorsTypes.add(sensorType);
     }
 
+    public void addSensorTypeById(long id) {
+        SensorType sensorType = new SensorType();
+        sensorType.setId(id);
+        sensorsTypes.add(sensorType);
+    }
     public void removeSensorType(SensorType sensorType) {
         sensorsTypes.remove(sensorType);
     }

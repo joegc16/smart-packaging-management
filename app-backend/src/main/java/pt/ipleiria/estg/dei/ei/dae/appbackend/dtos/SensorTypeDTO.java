@@ -8,7 +8,8 @@ public class SensorTypeDTO implements Serializable {
 
     public SensorTypeDTO(){}
 
-    public SensorTypeDTO(String name){
+    public SensorTypeDTO(long id, String name){
+        this.id = id;
         this.name = name;
     }
 

@@ -10,7 +10,6 @@ Accept: application/json
 GET http://localhost:8080/academics/api/orders
 Accept: application/json
 
-
 ### return Order Details
 GET http://localhost:8080/academics/api/orders/1
 Accept: application/json
@@ -22,3 +21,82 @@ Accept: application/json
 ### return Sensors by Order Id
 GET http://localhost:8080/academics/api/orders/1/sensors
 Accept: application/json
+
+### Products All
+GET http://localhost:8080/academics/api/products/
+Accept: application/json
+
+
+### Product create
+POST http://localhost:8080/academics/api/products/
+Content-Type: application/json
+
+{
+  "name": "Product 1",
+  "brand": "Some other Brand",
+  "description": "another best product ever",
+  "totalQuantity": 180,
+  "manufacturerId": 1
+}
+
+### Product by Id
+GET http://localhost:8080/academics/api/products/3
+Accept: application/json
+
+### Product Delete by Id
+DELETE http://localhost:8080/academics/api/products/3
+
+### Product Update by Id
+PUT http://localhost:8080/academics/api/products/3
+Content-Type: application/json
+
+{
+  "name": "Product updated",
+  "brand": "Some other Brand",
+  "description": "another best product ever",
+  "totalQuantity": 180,
+  "manufacturerUsername": "joao"
+}
+
+
+### Package All
+GET http://localhost:8080/academics/api/packages/
+Accept: application/json
+
+### Package create
+POST http://localhost:8080/academics/api/packages/
+Content-Type: application/json
+
+{
+  "name": "Package 1",
+  "packageType": 3,
+  "material": "Plastic",
+  "sensorsTypes": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    }
+  ]
+}
+
+### Package by Id
+GET http://localhost:8080/academics/api/packages/5
+Accept: application/json
+
+### Package Update by Id
+PUT http://localhost:8080/academics/api/packages/5
+Content-Type: application/json
+
+{
+  "name": "Package 1",
+  "packageType": 3,
+  "material": "Plastic",
+  "sensorsTypes": [
+    {
+      "id": 1
+    }
+
+  ]
+}

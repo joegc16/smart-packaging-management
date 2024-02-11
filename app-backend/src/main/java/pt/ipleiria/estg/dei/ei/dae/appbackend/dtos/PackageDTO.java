@@ -6,20 +6,18 @@ import java.util.List;
 public class PackageDTO implements Serializable {
     private long code;
     private String name;
-    private String packageType;
+    private long packageType;
     private String material;
-    private int totalQuantity;
     private List<SensorTypeDTO> sensorsTypes;
 
     public PackageDTO() {
     }
 
-    public PackageDTO(long code,String name, String packageType, String material, int totalQuantity, List<SensorTypeDTO> sensorsTypes) {
+    public PackageDTO(long code,String name, long packageType, String material, List<SensorTypeDTO> sensorsTypes) {
         this.code = code;
         this.name = name;
         this.packageType = packageType;
         this.material = material;
-        this.totalQuantity = totalQuantity;
         this.sensorsTypes = sensorsTypes;
     }
 
@@ -39,11 +37,11 @@ public class PackageDTO implements Serializable {
         this.name = name;
     }
 
-    public String getPackageType() {
+    public long getPackageType() {
         return packageType;
     }
 
-    public void setPackageType(String packageType) {
+    public void setPackageType(long packageType) {
         this.packageType = packageType;
     }
 
@@ -53,14 +51,6 @@ public class PackageDTO implements Serializable {
 
     public void setMaterial(String material) {
         this.material = material;
-    }
-
-    public int getTotalQuantity() {
-        return totalQuantity;
-    }
-
-    public void setTotalQuantity(int totalQuantity) {
-        this.totalQuantity = totalQuantity;
     }
 
     public List<SensorTypeDTO> getSensorsTypes() {
