@@ -22,7 +22,7 @@ Content-Type: application/json
 
   "customerId": 3,
   "manufacturerId": 1,
-  "logisticOperatorId" : 4,
+  "logisticOperatorId" : 5,
   "orderDate": "2024-02-12",
   "deliveryDate": null,
   "estimatedDeliveryTime": "1 week",
@@ -218,3 +218,39 @@ Content-Type: application/json
 
 ### Manufacturer Delete by Id
 DELETE http://localhost:8080/academics/api/manufacturers/5
+
+
+### LogisticOperator Id
+GET http://localhost:8080/academics/api/logistic-operators/5
+Accept: application/json
+
+### LogisticOperator Orders
+GET http://localhost:8080/academics/api/logistic-operators/5/orders
+Accept: application/json
+
+### LogisticOperator Create
+POST http://localhost:8080/academics/api/logistic-operators/
+Content-Type: application/json
+
+{
+  "username": "LogisticMax",
+  "password": "123",
+  "name": "Logistic",
+  "email": "maxi@gmail.com",
+  "role": 3
+}
+
+### LogisticOperator Delete by Id
+DELETE http://localhost:8080/academics/api/logistic-operators/5
+
+### LogisticOperator Update by Id
+PUT http://localhost:8080/academics/api/logistic-operators/5
+Content-Type: application/json
+
+{
+  "username": "LogisticMaxUpdated",
+  "password": "123",
+  "name": "Logistic",
+  "email": "newemail@gmail.com",
+  "role": 3
+}

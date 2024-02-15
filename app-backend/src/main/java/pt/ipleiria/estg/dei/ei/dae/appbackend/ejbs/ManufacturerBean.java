@@ -16,8 +16,8 @@ public class ManufacturerBean {
 
     public void create(String name, String password, String username, String email, long roleId) {
         UserRole role = em.find(UserRole.class, roleId);
-        if (role == null) {
-            System.err.println("Role does not exist");
+        if (role == null || role.getId() != 1) {
+            System.err.println("Role does not exist or Is not a Manufacturer");
         }
         if (exists(username)) {
             System.err.println("Manufacturer username already exists");
@@ -89,8 +89,8 @@ public class ManufacturerBean {
             return false;
         }
         UserRole userRole = em.find(UserRole.class, role);
-        if (userRole == null) {
-            System.err.println("Role does not exist");
+        if (userRole == null || userRole.getId() != 1) {
+            System.err.println("Role does not exist or Is not a Manufacturer");
             return false;
         }
         //em.lock(manufacturer, LockModeType.OPTIMISTIC);

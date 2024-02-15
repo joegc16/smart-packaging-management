@@ -62,7 +62,6 @@ public class ManufacturerService {
         }
         List<OrderDTO> dtos = ordersToDTOs(manufacturer.getOrders());
         return Response.ok(dtos).build();
-
     }
 
     @POST

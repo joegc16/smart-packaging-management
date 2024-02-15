@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 public class LogisticOperator extends User{
-    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "logisticOperator", cascade = CascadeType.ALL)
     private List<Order> orders;
 
     public LogisticOperator() {
