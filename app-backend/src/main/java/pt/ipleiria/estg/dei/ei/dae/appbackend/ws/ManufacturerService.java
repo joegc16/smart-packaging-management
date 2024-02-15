@@ -144,9 +144,9 @@ public class ManufacturerService {
     }
 
     private OrderDTO orderToDTO(Order order) {
-        Date deliveryDate = order.getDeliveryDate();
+        String deliveryDate = order.getDeliveryDate() == null ? null : order.getDeliveryDate().toString() ;
         if (deliveryDate == null)
-            deliveryDate = new Date();
+            deliveryDate = "Not Defined";
         return new OrderDTO(
                 order.getId(),
                 order.getCustomer().getId(),

@@ -85,7 +85,7 @@ public class OrderService {
                 orderDTO.getManufacturerId(),
                 orderDTO.getLogisticOperatorId(),
                 dateFormat.parse(orderDTO.getOrderDate()),
-                new Date(),
+                null,
                 orderDTO.getEstimatedDeliveryTime(),
                 orderDTO.getPackageLocation(),
                 orderDTO.getCity(),
@@ -140,9 +140,9 @@ public class OrderService {
     }
 
     private OrderDTO orderToDTO(Order order) {
-        Date deliveryDate = order.getDeliveryDate();
+        String deliveryDate = order.getDeliveryDate() == null ? null : order.getDeliveryDate().toString() ;
         if (deliveryDate == null)
-            deliveryDate = new Date();
+            deliveryDate = "Not Defined";
         return new OrderDTO(
                 order.getId(),
                 order.getCustomer().getId(),
