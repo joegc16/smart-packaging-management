@@ -9,6 +9,7 @@ import pt.ipleiria.estg.dei.ei.dae.appbackend.dtos.OrderItemDTO;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.dtos.UserDTO;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.ejbs.OrderBean;
+import pt.ipleiria.estg.dei.ei.dae.appbackend.ejbs.OrderItemBean;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.ejbs.SensorBean;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Order;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.OrderItem;
@@ -26,6 +27,9 @@ import java.util.stream.Collectors;
 public class OrderService {
     @EJB
     private OrderBean orderBean;
+    @EJB
+    private OrderItemBean orderItemBean;
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
@@ -76,7 +80,7 @@ public class OrderService {
     @POST
     @Path("/")
     public Response createOrder(OrderDTO orderDTO) throws ParseException {
-        orderBean.create(
+         Order newOrder = orderBean.create(
                 orderDTO.getCustomerId(),
                 orderDTO.getManufacturerId(),
                 orderDTO.getLogisticOperatorId(),
@@ -92,11 +96,20 @@ public class OrderService {
                 orderDTO.getStatus(),
                 orderDTO.getCount()
         );
-        Order newOrder = orderBean.findOrder(orderDTO.getId());
         if (newOrder == null)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR_CREATING_ORDER").build();
-        return
-                Response.status(Response.Status.CREATED).entity(orderToDTO(newOrder)).build();
+
+        List<OrderItemDTO> orderItems = orderDTO.getOrderItems();
+        for (OrderItemDTO orderItemDTO : orderItems) {
+            orderItemBean.create(
+                    orderItemDTO.getProductPackageId(),
+                    newOrder.getId(),
+                    orderItemDTO.getQuantity(),
+                    orderItemDTO.getSubPrice()
+            );
+        }
+        return Response.ok(orderToDTOWithOrderItem(newOrder)).build();
+
     }
 
     @PUT
@@ -145,7 +158,32 @@ public class OrderService {
                 order.getAddress(),
                 order.getPaymentMethod(),
                 order.getStatus(),
-                order.getCount()
+                order.getCount(),
+                null
+        );
+    }
+
+    private OrderDTO orderToDTOWithOrderItem(Order order) {
+        Date deliveryDate = order.getDeliveryDate();
+        if (deliveryDate == null)
+            deliveryDate = new Date();
+        return new OrderDTO(
+                order.getId(),
+                order.getCustomer().getId(),
+                order.getManufacturer().getId(),
+                order.getLogisticOperator().getId(),
+                order.getOrderDate().toString(),
+                deliveryDate.toString(),
+                order.getEstimatedDeliveryTime(),
+                order.getPackageLocation(),
+                order.getCity(),
+                order.getPostalCode(),
+                order.getCountry(),
+                order.getAddress(),
+                order.getPaymentMethod(),
+                order.getStatus(),
+                order.getCount(),
+                itemsToDTOs( order.getOrderItems())
         );
     }
 

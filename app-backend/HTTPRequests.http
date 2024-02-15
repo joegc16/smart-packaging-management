@@ -6,19 +6,53 @@ Accept: application/json
 GET http://localhost:8080/academics/api/sensors/1
 Accept: application/json
 
-### return All Orders
+### All Orders
 GET http://localhost:8080/academics/api/orders
 Accept: application/json
 
-### return Order Details
+###Order Details
 GET http://localhost:8080/academics/api/orders/1
 Accept: application/json
 
-### return OrderItems by Order Id
-GET http://localhost:8080/academics/api/orders/1/items
+### Order Create
+POST http://localhost:8080/academics/api/orders
+Content-Type: application/json
+
+{
+
+  "customerId": 3,
+  "manufacturerId": 1,
+  "logisticOperatorId" : 4,
+  "orderDate": "2024-02-12",
+  "deliveryDate": null,
+  "estimatedDeliveryTime": "1 week",
+  "packageLocation": "Coimbra",
+  "city": "Coimbra",
+  "postalCode": "3000-000",
+  "country": "Portugal",
+  "address": "Rua do Brasil",
+  "paymentMethod": "Credit Card",
+  "status": "Pending",
+  "count" : 25.98,
+  "orderItems": [
+    {
+      "productPackageId": 2,
+      "quantity": 2,
+      "subPrice": 12.99
+    },
+    {
+      "productPackageId": 4,
+      "quantity": 1,
+      "subPrice": 12.99
+    }
+    ]
+}
+
+###OrderItems by Order Id
+GET http://localhost:8080/academics/api/orders/3/items
 Accept: application/json
 
-### return Sensors by Order Id
+### Order Sensors Id
 GET http://localhost:8080/academics/api/orders/1/sensors
 Accept: application/json
 
@@ -145,3 +179,42 @@ Content-Type: application/json
 
 ### ProductPackage Delete by Id
 DELETE http://localhost:8080/academics/api/productPackages/5
+
+
+### Manufacturer Id
+GET http://localhost:8080/academics/api/manufacturers/1
+Accept: application/json
+
+### Manufacturer Products
+GET http://localhost:8080/academics/api/manufacturers/1/products
+Accept: application/json
+
+### Manufacturer Orders
+GET http://localhost:8080/academics/api/manufacturers/1/orders
+
+### Manufacturer Create
+POST http://localhost:8080/academics/api/manufacturers/
+Content-Type: application/json
+
+{
+    "username": "JoeMax",
+    "password": "123",
+    "name": "Joe",
+    "email": "joemax@gmail.com",
+  "role": 1
+}
+
+### Manufacturer Update by Id
+PUT http://localhost:8080/academics/api/manufacturers/5
+Content-Type: application/json
+
+{
+    "username": "JoeMax",
+    "password": "123",
+    "name": "Joe",
+    "email": "joeUpdates@gmail.com",
+    "role": 1
+}
+
+### Manufacturer Delete by Id
+DELETE http://localhost:8080/academics/api/manufacturers/5

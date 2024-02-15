@@ -14,23 +14,23 @@ public class OrderBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void create(long customerId, long manufacturerId, long logisticOperatorId, Date orderDate, Date deliveryDate,
-                       String estimatedDeliveryTime, String packageLocation, String city, String postalCode, String country, String address, String paymentMethod,
-                       String status, Double count) {
+    public Order create(long customerId, long manufacturerId, long logisticOperatorId, Date orderDate, Date deliveryDate,
+                       String estimatedDeliveryTime, String packageLocation, String city, String postalCode,
+                       String country, String address, String paymentMethod, String status, Double count) {
         Customer customer = em.find(Customer.class, customerId);
         if (customer == null) {
             System.err.println("Customer does not exist");
-            return;
+            return null;
         }
         Manufacturer manufacturer = em.find(Manufacturer.class, manufacturerId);
         if (manufacturer == null) {
             System.err.println("Manufacturer does not exist");
-            return;
+            return null;
         }
         LogisticOperator logisticOperator = em.find(LogisticOperator.class, logisticOperatorId);
         if (logisticOperator == null) {
             System.err.println("Logistic Operator does not exist");
-            return;
+            return null;
         }
         Order order = new Order(customer, manufacturer, logisticOperator, orderDate, deliveryDate,
                 estimatedDeliveryTime, packageLocation, city, postalCode, country, address, paymentMethod, status, count);
@@ -38,6 +38,7 @@ public class OrderBean {
         manufacturer.addOrder(order);
         logisticOperator.addOrder(order);
         em.persist(order);
+        return order;
     }
 
     public Order findOrder(long id) {
@@ -50,7 +51,6 @@ public class OrderBean {
 
     public Order getOrderItems(long id) {
         Order order = this.findOrder(id);
-        // Check if it exists, etc...
         if (order == null) {
             return null;
         }
@@ -60,22 +60,11 @@ public class OrderBean {
 
     public Order getOrderSensors(long id) {
         Order order = this.findOrder(id);
-        // Check if it exists, etc...
         if (order == null) {
             return null;
         }
         Hibernate.initialize(order.getSensors());
         return order;
-    }
-
-    public void updateOrderItems(long id, List<OrderItem> orderItems) {
-        Order order = em.find(Order.class, id);
-        if (order == null) {
-            System.err.println("Order does not exist");
-            return;
-        }
-        order.setOrderItems(orderItems);
-        em.merge(order);
     }
 
     public boolean update(long id, Date parse, String estimatedDeliveryTime, String packageLocation, String status) {

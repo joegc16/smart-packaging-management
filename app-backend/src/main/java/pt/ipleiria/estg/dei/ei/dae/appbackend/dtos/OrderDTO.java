@@ -31,7 +31,7 @@ public class OrderDTO implements Serializable {
     public OrderDTO(long id,long customerId, long manufacturerId, long logisticOperatorId,
                     String orderDate, String deliveryDate, String estimatedDeliveryTime,
                     String packageLocation, String city,  String postalCode, String country, String address,
-                    String paymentMethod, String status, Double count) {
+                    String paymentMethod, String status, Double count, List<OrderItemDTO> orderItems) {
         this.id = id;
         this.customerId = customerId;
         this.manufacturerId = manufacturerId;
@@ -47,7 +47,7 @@ public class OrderDTO implements Serializable {
         this.paymentMethod = paymentMethod;
         this.status = status;
         this.count = count;
-        this.orderItems = new ArrayList<>();
+        this.orderItems = orderItems;
         this.sensors = new ArrayList<>();
     }
 
