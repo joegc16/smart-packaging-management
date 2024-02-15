@@ -94,6 +94,7 @@ public class CustomerService {
                     .entity("ERROR_FINDING_CUSTOMER")
                     .build();
         }
+        cartBean.delete(customer.getCart().getId());
         customerBean.delete(id);
         Customer deletedCustomer= customerBean.find(id);
         if (deletedCustomer != null)

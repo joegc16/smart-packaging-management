@@ -264,7 +264,7 @@ GET http://localhost:8080/academics/api/customers/2/orders
 Accept: application/json
 
 ### Customer Cart
-GET http://localhost:8080/academics/api/customers/5/cart
+GET http://localhost:8080/academics/api/customers/3/cart
 Accept: application/json
 
 ### Customer Create
@@ -290,3 +290,31 @@ Content-Type: application/json
   "email": "updatedmeail@gmail.com",
   "role": 2
 }
+
+### Customer Delete by Id
+DELETE http://localhost:8080/academics/api/customers/6
+
+### CartItem Create
+POST http://localhost:8080/academics/api/carts/2/items/
+Content-Type: application/json
+
+{
+  "productPackageId": 2,
+  "quantity": 1,
+  "subPrice": 4.99
+}
+
+### CartItem Remove by Id
+DELETE http://localhost:8080/academics/api/carts/2/items/5
+
+### CartItem Update by Id
+PATCH http://localhost:8080/academics/api/carts/2/items/4
+Content-Type: application/json
+
+{
+  "quantity": 3,
+  "subPrice": 14.97
+}
+
+### CartItem Clean
+PUT http://localhost:8080/academics/api/carts/2/clean

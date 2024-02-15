@@ -69,9 +69,10 @@ public class CustomerBean {
             return;
         }
         List<Order> orders = customer.getOrders();
-        if (orders != null) {
+        if (orders.size() > 0) {
             System.err.println("Customer has order associated");
         }
+        customer.setCart(null);
         em.remove(customer);
     }
 

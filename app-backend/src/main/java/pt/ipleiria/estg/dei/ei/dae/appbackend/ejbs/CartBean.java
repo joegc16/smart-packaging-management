@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.appbackend.ejbs;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Cart;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.CartItem;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Customer;
@@ -36,18 +37,50 @@ public class CartBean {
         return em.find(Cart.class, id);
     }
 
-    public void cleanCart(long id) {
-        Cart cart = em.find(Cart.class, id);
+    public void updateCartCount(long id) {
+        Cart cart = this.find(id);
         if (cart == null) {
             System.out.println("Cart not found");
             return;
         }
-        List<CartItem> cartItemsCopy = new ArrayList<>(cart.getCartItems()); //just  reference to the original list
+        double count = 0;
+        for (CartItem cartItem : cart.getCartItems()) {
+            count += cartItem.getSubPrice();
+        }
+        cart.setCount(count);
+    }
+
+    public void delete(long id) {
+        Cart cart = this.find(id);
+        if (cart == null) {
+            System.out.println("Cart not found");
+            return;
+        }
+        em.remove(cart);
+    }
+
+    public void clearCart(long id) {
+        Cart cart = this.find(id);
+        if (cart == null) {
+            System.out.println("Cart not found");
+            return;
+        }
+        List<CartItem> cartItemsCopy = new ArrayList<>(cart.getCartItems());
         for (CartItem cartItem : cartItemsCopy) {
             cart.removeCartItem(cartItem);
             em.remove(cartItem);
         }
         cart.setCount(0);
         em.merge(cart);
+    }
+
+    public Cart findWithCartItems(long id) {
+        Cart cart = this.find(id);
+        if (cart == null) {
+            System.out.println("Cart not found");
+            return null;
+        }
+        Hibernate.initialize(cart.getCartItems());
+        return cart;
     }
 }
