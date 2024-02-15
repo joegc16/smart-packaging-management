@@ -36,7 +36,7 @@ public class CustomerService {
 
     @GET
     @Path("{id}/orders")
-    public Response geCustomerOrders(@PathParam("id") long id){
+    public Response getCustomerOrders(@PathParam("id") long id){
         Customer customer = customerBean.getCustomerOrders(id);
         if (customer == null) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -49,7 +49,7 @@ public class CustomerService {
 
     @GET
     @Path("{id}/cart")
-    public Response geCustomerCart(@PathParam("id") long id){
+    public Response getCustomerCart(@PathParam("id") long id){
         Customer customer = customerBean.getCustomerCart(id);
         if (customer == null) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -98,6 +98,7 @@ public class CustomerService {
         Customer deletedCustomer= customerBean.find(id);
         if (deletedCustomer != null)
             return Response.status(Response.Status.BAD_REQUEST).entity("SOMETHING WRONg DELETING CUSTOMER").build();
+        cartBean.delete(customer.getCart().getId());
         return Response.ok().build();
     }
 

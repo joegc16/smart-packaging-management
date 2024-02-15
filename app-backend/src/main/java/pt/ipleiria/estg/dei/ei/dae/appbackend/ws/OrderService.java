@@ -99,13 +99,13 @@ public class OrderService {
         if (newOrder == null)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR_CREATING_ORDER").build();
 
-        List<OrderItemDTO> orderItems = orderDTO.getOrderItems();
-        for (OrderItemDTO orderItemDTO : orderItems) {
+        List<OrderItemDTO> orderItemsDTO = orderDTO.getOrderItems();
+        for (OrderItemDTO itemDTO : orderItemsDTO) {
             orderItemBean.create(
-                    orderItemDTO.getProductPackageId(),
+                    itemDTO.getProductPackageId(),
                     newOrder.getId(),
-                    orderItemDTO.getQuantity(),
-                    orderItemDTO.getSubPrice()
+                    itemDTO.getQuantity(),
+                    itemDTO.getSubPrice()
             );
         }
         return Response.ok(orderToDTOWithOrderItem(newOrder)).build();
