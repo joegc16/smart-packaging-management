@@ -81,7 +81,7 @@ public class LogisticOperatorService {
         logisticOperatorBean.delete(id);
         LogisticOperator deletedLogisticOperator = logisticOperatorBean.find(id);
         if (deletedLogisticOperator != null)
-            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_DELETING_LOGISTIC_OPERATOR").build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_DELETING_LOGISTIC_OPERATOR_ORDER_Associated").build();
         return Response.ok().entity("DELETED SUCCESSFULLY").build();
     }
 

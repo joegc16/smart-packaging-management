@@ -48,7 +48,6 @@ public class ManufacturerService {
         }
         List<ProductDTO> dtos = productsToDTOs(manufacturer.getProducts());
         return Response.ok(dtos).build();
-
     }
 
     @GET
@@ -96,7 +95,7 @@ public class ManufacturerService {
         manufacturerBean.delete(id);
         Manufacturer deletedManufacturer = manufacturerBean.find(id);
         if (deletedManufacturer != null)
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("Manufacturer has orders or products associated").build();
         return Response.ok().build();
     }
 

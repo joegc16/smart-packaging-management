@@ -9,7 +9,10 @@ import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.dtos.LogisticOperatorDTO;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.LogisticOperator;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Manufacturer;
+import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Order;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.UserRole;
+
+import java.util.List;
 
 @Stateless
 public class LogisticOperatorBean {
@@ -72,6 +75,11 @@ public class LogisticOperatorBean {
         LogisticOperator logisticOperator = this.find(id);
         if (logisticOperator == null) {
             System.err.println("Logistic Operator does not exist");
+            return;
+        }
+        List<Order> orders = logisticOperator.getOrders();
+        if (orders != null) {
+            System.err.println("Logistic Has orders associated, delete it first");
             return;
         }
         em.remove(logisticOperator);

@@ -4,6 +4,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Manufacturer;
+import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Order;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Product;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.UserRole;
 
@@ -75,15 +76,21 @@ public class ManufacturerBean {
             System.err.println("Manufacturer does not exist");
             return;
         }
+        List<Order> orders = manufacturer.getOrders();
+        if (orders != null) {
+            System.err.println("Manufacturer has orders, delete them first");
+            return;
+        }
         List<Product> products = manufacturer.getProducts();
-        for (Product product : products) {
-            em.remove(product);
+        if (products != null) {
+            System.err.println("Manufacturer has products, delete them first");
+            return;
         }
         em.remove(manufacturer);
     }
 
     public boolean update(long id, String name, String password, String username, String email, long role) {
-        Manufacturer manufacturer = em.find(Manufacturer.class, id);
+        Manufacturer manufacturer = this.find(id);
         if (manufacturer == null) {
             System.err.println("Manufacturer does not exist");
             return false;
