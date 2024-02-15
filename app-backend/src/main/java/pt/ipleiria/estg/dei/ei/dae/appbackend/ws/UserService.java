@@ -34,9 +34,10 @@ public class UserService {
         return new UserDTO(
                 user.getId(),
                 user.getName(),
+                user.getPassword(),
                 user.getUsername(),
                 user.getEmail(),
-                user.getRole().getName()
+                user.getRole().getId()
         );
     }
 }
