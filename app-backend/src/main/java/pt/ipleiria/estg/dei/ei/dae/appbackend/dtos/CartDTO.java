@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.appbackend.dtos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartDTO implements Serializable {
@@ -10,11 +11,13 @@ public class CartDTO implements Serializable {
     private double count;
 
     public CartDTO() {
+        cartItems = new ArrayList<>();
     }
 
-    public CartDTO(long id, long customerId, double count) {
+    public CartDTO(long id, long customerId, List<CartItemDTO> cartItems, double count) {
         this.id = id;
         this.customerId = customerId;
+        this.cartItems = cartItems;
         this.count = count;
     }
 

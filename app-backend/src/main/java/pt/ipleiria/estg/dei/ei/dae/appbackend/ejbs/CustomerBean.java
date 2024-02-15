@@ -4,8 +4,12 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Customer;
+import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Order;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.UserRole;
+
+import java.util.List;
 
 @Stateless
 public class CustomerBean {
@@ -14,8 +18,8 @@ public class CustomerBean {
 
     public void create(String name, String password, String username, String email, long role_id) {
         UserRole role = em.find(UserRole.class, role_id);
-        if (role == null) {
-            System.err.println("Role does not exist");
+        if (role == null || role.getId() != 2) {
+            System.err.println("Role does not exist or Is not a Customer");
         }
         if (exists(username)) {
             System.err.println("Customer username already exists");
@@ -31,5 +35,73 @@ public class CustomerBean {
         );
         query.setParameter("username", username);
         return (Long)query.getSingleResult() > 0L;
+    }
+
+    public Customer find(long id) {
+        Customer customer = em.find(Customer.class, id);
+        if (customer == null) {
+            System.err.println("Customer does not exist");
+            return null;
+        }
+        return customer;
+    }
+
+    public Customer getCustomerOrders(long id) {
+        Customer customer = this.find(id);
+        if (customer == null) {
+            return null;
+        }
+        Hibernate.initialize(customer.getOrders());
+        return customer;
+    }
+
+    public Customer findByUsername(String username) {
+        Query query = em.createQuery(
+                "SELECT c FROM Customer c WHERE c.username = :username", Customer.class);
+        query.setParameter("username", username);
+        return (Customer) query.getSingleResult();
+    }
+
+    public void delete(long id) {
+        Customer customer = find(id);
+        if (customer == null) {
+            System.err.println("Customer does not exist");
+            return;
+        }
+        List<Order> orders = customer.getOrders();
+        if (orders != null) {
+            System.err.println("Customer has order associated");
+        }
+        em.remove(customer);
+    }
+
+    public boolean update(long id, String name, String password, String username, String email, long role) {
+        Customer customer = this.find(id);
+        if (customer == null) {
+            System.err.println("Customer does not exist");
+            return false;
+        }
+        UserRole userRole = em.find(UserRole.class, role);
+        if (userRole == null || userRole.getId() != 2) {
+            System.err.println("Role does not exist or Is not a Customer");
+            return false;
+        }
+        //em.lock(customer, LockModeType.OPTIMISTIC);
+        customer.setName(name);
+        customer.setPassword(password);
+        customer.setUsername(username);
+        customer.setEmail(email);
+        customer.setRole(userRole);
+        return true;
+    }
+
+    public Customer getCustomerCart(long id) {
+        Customer customer = this.find(id);
+        if (customer == null) {
+            return null;
+        }
+        Hibernate.initialize(customer.getCart());
+        Hibernate.initialize(customer.getCart().getCartItems());
+        return customer;
     }
 }
