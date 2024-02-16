@@ -7,7 +7,7 @@
             <a href="#">About</a>
             <a href="#">Services</a>
             <a href="#">Contact</a>
-            <a href="">Login</a>
+              <nuxt-link to="/auth/login">Login</nuxt-link>
               <a href="">Logout</a>
             </nav>
         </header>
