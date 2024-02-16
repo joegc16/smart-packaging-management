@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.appbackend.ejbs;
 
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -8,6 +9,7 @@ import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Customer;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Order;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.UserRole;
+import pt.ipleiria.estg.dei.ei.dae.appbackend.security.Hasher;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ import java.util.List;
 public class CustomerBean {
     @PersistenceContext
     private EntityManager em;
+    @Inject
+    private Hasher hasher;
 
     public void create(String name, String password, String username, String email, long role_id) {
         UserRole role = em.find(UserRole.class, role_id);
@@ -24,7 +28,7 @@ public class CustomerBean {
         if (exists(username)) {
             System.err.println("Customer username already exists");
         }
-        Customer customer = new Customer(name, password, username, email, role);
+        Customer customer = new Customer(name, hasher.hash(password), username, email, role);
         em.persist(customer);
     }
 
@@ -38,12 +42,7 @@ public class CustomerBean {
     }
 
     public Customer find(long id) {
-        Customer customer = em.find(Customer.class, id);
-        if (customer == null) {
-            System.err.println("Customer does not exist");
-            return null;
-        }
-        return customer;
+        return em.find(Customer.class, id);
     }
 
     public Customer getCustomerOrders(long id) {

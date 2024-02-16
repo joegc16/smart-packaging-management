@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.appbackend.ejbs;
 
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PersistenceContext;
@@ -11,6 +12,7 @@ import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.LogisticOperator;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Manufacturer;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Order;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.UserRole;
+import pt.ipleiria.estg.dei.ei.dae.appbackend.security.Hasher;
 
 import java.util.List;
 
@@ -18,6 +20,8 @@ import java.util.List;
 public class LogisticOperatorBean {
     @PersistenceContext
     private EntityManager em;
+    @Inject
+    private Hasher hasher;
 
     public void create(String name, String password, String username, String email, long roleId) {
         UserRole role = em.find(UserRole.class, roleId);
@@ -29,7 +33,7 @@ public class LogisticOperatorBean {
             System.err.println("User username already exists");
             return;
         }
-        LogisticOperator logisticOperator = new LogisticOperator(name, password, username, email, role);
+        LogisticOperator logisticOperator = new LogisticOperator(name, hasher.hash(password), username, email, role);
         em.persist(logisticOperator);
     }
 
@@ -43,12 +47,7 @@ public class LogisticOperatorBean {
     }
 
     public LogisticOperator find(long id) {
-        LogisticOperator logisticOperator = em.find(LogisticOperator.class, id);
-        if (logisticOperator == null) {
-            System.err.println("Logistic Operator does not exist");
-            return null;
-        }
-        return logisticOperator;
+        return em.find(LogisticOperator.class, id);
     }
 
     public LogisticOperator findByUsername(String username) {

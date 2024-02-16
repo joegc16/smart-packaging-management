@@ -1,12 +1,14 @@
 package pt.ipleiria.estg.dei.ei.dae.appbackend.ejbs;
 
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.*;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Manufacturer;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Order;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.Product;
 import pt.ipleiria.estg.dei.ei.dae.appbackend.entitites.UserRole;
+import pt.ipleiria.estg.dei.ei.dae.appbackend.security.Hasher;
 
 import java.util.List;
 
@@ -14,6 +16,8 @@ import java.util.List;
 public class ManufacturerBean {
     @PersistenceContext
     private EntityManager em;
+    @Inject
+    private Hasher hasher;
 
     public void create(String name, String password, String username, String email, long roleId) {
         UserRole role = em.find(UserRole.class, roleId);
@@ -23,16 +27,12 @@ public class ManufacturerBean {
         if (exists(username)) {
             System.err.println("Manufacturer username already exists");
         }
-        Manufacturer manufacturer = new Manufacturer(name, password, username, email, role);
+        Manufacturer manufacturer = new Manufacturer(name, hasher.hash(password), username, email, role);
         em.persist(manufacturer);
     }
 
     public Manufacturer find(long id){
-        Manufacturer manufacturer = em.find(Manufacturer.class, id);
-        if (manufacturer == null){
-            System.err.println("Manufacturer Does not Exists");
-        }
-        return manufacturer;
+        return em.find(Manufacturer.class, id);
     }
 
     public Manufacturer findByUsername(String username) {

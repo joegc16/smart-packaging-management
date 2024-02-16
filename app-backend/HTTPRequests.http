@@ -258,6 +258,7 @@ Content-Type: application/json
 ### Customer Id
 GET http://localhost:8080/academics/api/customers/5
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJDdXN0b21lck1heCIsImlhdCI6MTcwODEwNTA1NSwiZXhwIjoxNzA4MTA4NjU1fQ.tCdk_lwORShihyaDGad4j7ptBzzAErWOphxqVrBqvEjIKJiK1mUMtEsU_mW0sP-S
 
 ### Customer Orders
 GET http://localhost:8080/academics/api/customers/2/orders
@@ -318,3 +319,14 @@ Content-Type: application/json
 
 ### CartItem Clean
 PUT http://localhost:8080/academics/api/carts/2/clean
+
+
+### REQUEST JWT TOKEN
+POST http://localhost:8080/academics/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "CustomerMax",
+  "password": "123"
+}
