@@ -1,11 +1,34 @@
 <template>
-  <h1>Login Form</h1>
-  <div>Username:
-    <input v-model="loginFormData.username"></div>
-  <div>Password:
-    <input v-model="loginFormData.password"></div>
-  <button @click="login">LOGIN</button>
-
+  <div class="form-container">
+    <form @submit.prevent="login">
+      <h3>Login</h3>
+      <div>
+        <div>
+          <label for="inputUsername">Username</label>
+          <input
+              type="text"
+              id="inputUsername"
+              placeholder="Your Username"
+              required
+              v-model="loginFormData.username">
+        </div>
+      </div>
+      <div>
+        <div>
+          <label for="inputPassword">Password</label>
+          <input
+              type="password"
+              id="inputPassword"
+              placeholder="Your Password"
+              required
+              v-model="loginFormData.password">
+        </div>
+      </div>
+      <div>
+        <button type="button" @click="login">Login</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script setup>
@@ -22,10 +45,13 @@ const loginFormData = ref({
 async function login() {
   if (await authStore.login(loginFormData)) {
     router.push('/')
-  }else{
+  } else {
     alert('you fucked up.')
   }
 }
 </script>
 
-<style scoped></style>
+<style>
+@import url("assets/form.css");
+</style>
+

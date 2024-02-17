@@ -3,17 +3,40 @@
         <header>
             <h5>OnShop</h5>
             <nav>
-            <a href="/">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-              <nuxt-link to="/auth/login">Login</nuxt-link>
-              <a href="">Logout</a>
+              <ul class="navbar">
+                <li>
+                  <nuxt-link :to="{ name: 'index'}">Home</nuxt-link>
+                </li>
+                <li v-show="!authStore.user">
+                  <nuxt-link :to="{ name: 'auth-login' }">Login</nuxt-link>
+                </li>
+                <li v-show="!authStore.user">
+                  <nuxt-link :to="{ name: 'auth-create'}">Register</nuxt-link>
+                </li>
+                <li v-show="authStore.user">
+                  <nuxt-link @click.prevent="logout">Logout</nuxt-link>
+                </li>
+              </ul>
             </nav>
         </header>
     </div>
 </template>
 <script setup>
+
+import {useAuthStore} from "../store/auth-store.js";
+
+const authStore = useAuthStore()
+const router = useRouter()
+
+
+const logout = async () => {
+  if (await authStore.logout()) {
+    await navigateTo({ name: 'index' })
+  } else {
+    alert('There was a problem logging out of the application!')
+  }
+}
+
 
 </script>
 <style>
@@ -34,25 +57,33 @@ h1 {
   justify-content: flex-start; /* Align to the left */
 }
 
-nav {
-  text-align: right;
-  justify-content: center; /* Center items horizontally */
-  align-items: center; /* Center items vertically */
-}
-
-nav a {
-  color: #fff; /* Text color for buttons */
-  text-decoration: none;
-  padding: 8px 12px; /* Padding for each button */
-  border-radius: 5px; /* Rounded corners for buttons */
-  background-color: #333; /* Button background color */
-  transition: background-color 0.3s ease; /* Smooth transition effect */
-}
-
 nav a:hover {
   background-color: #777; /* Lighter color on hover */
   color: #fff; /* Text color on hover */
   text-decoration: none; /* Remove underline on hover */
+}
+
+.navbar {
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+  display: flex; /* Use flexbox to create a horizontal layout */
+}
+
+.navbar li {
+  margin-right: 20px; /* Add spacing between navbar items */
+}
+
+.navbar li:last-child {
+  margin-right: 0; /* Remove margin from the last navbar item */
+}
+
+.navbar a {
+  color: #fff; /* Text color for navbar links */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.navbar a:hover {
+  text-decoration: underline; /* Add underline on hover */
 }
 
 </style>

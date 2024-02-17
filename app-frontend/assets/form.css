@@ -1,0 +1,40 @@
+
+.form-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+}
+
+form {
+    margin: 20px; /* Add some margin for spacing */
+    text-align: center;
+    border: 1px solid #555; /* 1px border with the color from the buttons */
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.9); /* Increased shadow effect */
+    padding: 20px; /* Padding for the form */
+    border-radius: 10px; /* Rounded corners for the form */
+    background-color: #fff; /* Form background color */
+    width: 300px; /* Adjust the width as needed */
+}
+
+form input {
+    width: 100%; /* Full width for the input field */
+    box-sizing: border-box; /* Include padding and border in the width */
+    padding: 8px; /* Padding for input field */
+    margin-bottom: 5px; /* Margin between input and button */
+}
+
+form button {
+    color: #fff; /* Text color for the button */
+    background-color: #555; /* Button background color */
+    border: none;
+    margin-top: 10px;
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 10px; /* Rounded corners for the button */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+button:hover {
+    background-color: #777; /* Lighter color on hover */
+}

@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 export const useAuthStore = defineStore("authStore", () => {
-    const user = useState('user')
+    const user = ref(null)
 
     const config = useRuntimeConfig()
     const api = config.public.API_URL;
@@ -53,10 +53,28 @@ export const useAuthStore = defineStore("authStore", () => {
         }
     }
 
-    async function restoreToken () {
+    async function createUser(endpoint, userForm){
+        try {
+            await $fetch(`${api}/${endpoint.value}`, {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userForm.value)
+            })
+            await login(userForm)
+            return true
+        }
+        catch(error) {
+            clearUser()
+            return false
+        }
+    }
+
+    function restoreToken () {
         let storedToken = sessionStorage.getItem('token')
         if (storedToken) {
-            await loadUser()
             return true
         }
         clearUser()
@@ -65,8 +83,8 @@ export const useAuthStore = defineStore("authStore", () => {
 
     function clearUser() {
         sessionStorage.removeItem('token')
-        user.value = ''
+        user.value = null
     }
 
-    return { user, logout, login, loadUser, clearUser, restoreToken }
+    return { user, logout, login, loadUser, clearUser, restoreToken, createUser }
 })
