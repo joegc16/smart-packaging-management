@@ -44,9 +44,10 @@ const loginFormData = ref({
 
 async function login() {
   if (await authStore.login(loginFormData)) {
-    router.push('/')
+    alert('Login successful')
+    await navigateTo('/')
   } else {
-    alert('you fucked up.')
+    alert('Username or password is incorrect. Please try again.')
   }
 }
 </script>

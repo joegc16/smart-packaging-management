@@ -96,8 +96,8 @@ const endpoint = computed(() => {
 
 const create = async () => {
   if (await authStore.createUser(endpoint, createFormData)) {
-    console.log("Success!");
-    navigateTo('/')
+    alert("Success!");
+    await navigateTo('/')
 
   } else {
     console.error("Error creating user");
