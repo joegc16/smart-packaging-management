@@ -88,7 +88,7 @@ public class CustomerBean {
         }
         //em.lock(customer, LockModeType.OPTIMISTIC);
         customer.setName(name);
-        customer.setPassword(password);
+        customer.setPassword(hasher.hash(password));
         customer.setUsername(username);
         customer.setEmail(email);
         customer.setRole(userRole);

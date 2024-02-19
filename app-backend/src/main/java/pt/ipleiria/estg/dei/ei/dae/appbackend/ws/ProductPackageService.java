@@ -40,6 +40,21 @@ public class ProductPackageService {
                 .build();
     }
 
+    @GET
+    @Path("/{id}/image")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response getProductPackageImage(@PathParam("id") long id) {
+        ProductPackage productPackage = productPackageBean.findProductPackageById(id);
+        if (productPackage != null) {
+            return Response.ok(productPackage.getImage()).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_PRODUCT_P")
+                .build();
+    }
+
+
+
     @POST
     @Path("/")
     public Response createProductPackage(ProductPackageDTO productPackageDTO) {
