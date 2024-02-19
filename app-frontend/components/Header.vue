@@ -1,89 +1,72 @@
 <template>
-    <div>
-        <header>
-            <h5>OnShop</h5>
-            <nav>
-              <ul class="navbar">
-                <li>
-                  <nuxt-link :to="{ name: 'index'}">Home</nuxt-link>
-                </li>
-                <li v-show="!authStore.user">
-                  <nuxt-link :to="{ name: 'auth-login' }">Login</nuxt-link>
-                </li>
-                <li v-show="!authStore.user">
-                  <nuxt-link :to="{ name: 'auth-create'}">Register</nuxt-link>
-                </li>
-                <li v-show="authStore.user">
-                  <nuxt-link @click.prevent="logout">Logout</nuxt-link>
-                </li>
-              </ul>
-            </nav>
-        </header>
-    </div>
+  <div>
+    <header>
+      <nav class="menu-bar">
+        <div class="group">
+          <a class="item title">Products Shop</a>
+        </div>
+        <div class="group">
+          <div class="item">
+            <nuxt-link :to="{ name: 'index' }">Home</nuxt-link>
+          </div>
+          <div class="item" v-if="authStore.user">
+            <nuxt-link :to="{ name: 'users-idClient-cart', params: { id: authStore.userId } }"
+              >Cart</nuxt-link>
+          </div>
+          <div class="item" v-if="authStore.user">
+            <nuxt-link :to="{ name: 'users-id', params: { id: authStore.userId } }"
+              >Profile</nuxt-link>
+          </div>
+          <div class="item" v-if="!authStore.user">
+            <nuxt-link :to="{ name: 'auth-login' }">Login</nuxt-link>
+          </div>
+          <div class="item" v-if="!authStore.user">
+            <nuxt-link :to="{ name: 'auth-create' }">Register</nuxt-link>
+          </div>
+          <div class="item" v-if="authStore.user">
+            <nuxt-link  @click.prevent="logout">Logout</nuxt-link>
+          </div>
+        </div>
+      </nav>
+    </header>
+  </div>
 </template>
 <script setup>
+import { useAuthStore } from "../store/auth-store.js";
 
-import {useAuthStore} from "../store/auth-store.js";
-
-const authStore = useAuthStore()
-const router = useRouter()
-
+const authStore = useAuthStore();
 
 const logout = async () => {
-  if (await authStore.logout()) {
-    await navigateTo({ name: 'index' })
+  if (authStore.logout()) {
+    await navigateTo({ name: "index" });
+    alert("You have been logged out of the application!");
   } else {
-    alert('There was a problem logging out of the application!')
+    alert("There was a problem logging out of the application!");
   }
-}
-
-
+};
 </script>
 <style>
-
-header {
-  background-color: #333; /* Dark background color */
-  color: #fff; /* Text color */
-  padding: 10px; /* Padding for content inside the header */
+.menu-bar {
+  background-color: #13c540;
   display: flex;
-  position: relative;
-  line-height: normal;
-  justify-content: space-between; /* Space items evenly along the main axis */
-  align-items: center; /* Center items vertically */
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
-h1 {
-  margin: 0; /* Remove default margin for h1 */
-  justify-content: flex-start; /* Align to the left */
+.item {
+  color: white;
+  background-color: transparent;
+  font-size: 18px;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 14px 20px;
 }
 
-nav a:hover {
-  background-color: #777; /* Lighter color on hover */
-  color: #fff; /* Text color on hover */
-  text-decoration: none; /* Remove underline on hover */
+.item.title {
+  font-weight: 600;
 }
 
-.navbar {
-  list-style: none; /* Remove bullet points */
-  padding: 0; /* Remove default padding */
-  display: flex; /* Use flexbox to create a horizontal layout */
+.item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
-
-.navbar li {
-  margin-right: 20px; /* Add spacing between navbar items */
-}
-
-.navbar li:last-child {
-  margin-right: 0; /* Remove margin from the last navbar item */
-}
-
-.navbar a {
-  color: #fff; /* Text color for navbar links */
-  text-decoration: none; /* Remove underline from links */
-}
-
-.navbar a:hover {
-  text-decoration: underline; /* Add underline on hover */
-}
-
 </style>
