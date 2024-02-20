@@ -20,6 +20,7 @@
             <strong>Manufacturer:</strong> {{ product.manufacturerUsername }}
           </p>
           <p><strong>Name:</strong> {{ product.name }}</p>
+          <button class="btn" @click="addToCart">Add to Cart</button> 
         </div>
         <div v-else class="loading">
           <p>Loading...</p>
@@ -34,9 +35,13 @@ const props = defineProps({
   productPackage: Object,
   product: Object,
 });
-
+const emit = defineEmits(['addToCart']);
 const getImagePath = (imageUrl) => imageUrl == "Not%20available" ? `/imgs/${imageUrl}`: '/imgs/default-image.png'
 
+const addToCart = () => {
+  // Add product to cart
+  emit('addToCart');
+}
 </script>
 
 <style scoped>

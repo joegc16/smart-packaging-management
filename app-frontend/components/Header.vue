@@ -10,6 +10,10 @@
             <nuxt-link :to="{ name: 'index' }">Home</nuxt-link>
           </div>
           <div class="item" v-if="authStore.user">
+            <nuxt-link :to="{ name: 'users-idClient-orders', params: { id: authStore.userId } }"
+              >Manage Orders</nuxt-link>
+          </div>
+          <div class="item" v-if="authStore.user && authStore.user.role == 2">
             <nuxt-link :to="{ name: 'users-idClient-cart', params: { id: authStore.userId } }"
               >Cart</nuxt-link>
           </div>

@@ -13,7 +13,7 @@ const props = defineProps({
       <div class="card-container">
         <nuxt-link :to="`products/${productPackage.id}`" v-for="(productPackage, index) in productsPackages" :key="index">
           <ProductsProduct :product="productPackage" />
-        </nuxt-link>
+        </nuxt-link>       
       </div>
     </div>
 </template>

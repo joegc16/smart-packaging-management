@@ -6,8 +6,15 @@ public class CartItemDTO implements Serializable {
     private long id;
     private long cartId;
     private long productPackageId;
+    private String imageProductPackage;
+    private double priceProductPackage;
+    private String nameProduct;
+    private String brandProduct;
+    private String namePackage;
+
     private int quantity;
     private double subPrice;
+
 
     public CartItemDTO() {
     }
@@ -17,6 +24,60 @@ public class CartItemDTO implements Serializable {
         this.productPackageId = productPackageId;
         this.quantity = quantity;
         this.subPrice = subPrice;
+    }
+
+    public CartItemDTO(long id, long cartId, long productPackageId, String imageProductPackage, String nameProduct,
+                       String namePackage, String brandProduct, int quantity, double subPrice, double priceProductPackage) {
+        this.id = id;
+        this.cartId = cartId;
+        this.productPackageId = productPackageId;
+        this.imageProductPackage = imageProductPackage;
+        this.nameProduct = nameProduct;
+        this.namePackage = namePackage;
+        this.brandProduct = brandProduct;
+        this.quantity = quantity;
+        this.subPrice = subPrice;
+        this.priceProductPackage = priceProductPackage;
+    }
+
+    public String getImageProductPackage() {
+        return imageProductPackage;
+    }
+
+    public void setImageProductPackage(String imageProductPackage) {
+        this.imageProductPackage = imageProductPackage;
+    }
+
+    public String getNameProduct() {
+        return nameProduct;
+    }
+
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
+    }
+
+    public String getNamePackage() {
+        return namePackage;
+    }
+
+    public void setNamePackage(String namePackage) {
+        this.namePackage = namePackage;
+    }
+
+    public double getPriceProductPackage() {
+        return priceProductPackage;
+    }
+
+    public void setPriceProductPackage(double priceProductPackage) {
+        this.priceProductPackage = priceProductPackage;
+    }
+
+    public String getBrandProduct() {
+        return brandProduct;
+    }
+
+    public void setBrandProduct(String brandProduct) {
+        this.brandProduct = brandProduct;
     }
 
     public long getId() {

@@ -203,9 +203,15 @@ public class CustomerService {
     private CartItemDTO cartItemToDTO(CartItem cartItem) {
         return new CartItemDTO(
                 cartItem.getId(),
+                cartItem.getCart().getId(),
                 cartItem.getProductPackage().getId(),
+                cartItem.getProductPackage().getImage(),
+                cartItem.getProductPackage().getProduct().getName(),
+                cartItem.getProductPackage().getPack().getName(),
+                cartItem.getProductPackage().getProduct().getBrand(),
                 cartItem.getQuantity(),
-                cartItem.getSubPrice()
+                cartItem.getSubPrice(),
+                cartItem.getProductPackage().getPrice()
         );
     }
 
